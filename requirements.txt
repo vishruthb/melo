@@ -1,0 +1,5 @@
+python-dotenv
+streamlit-auth0-component
+streamlit
+torch
+torchvision
