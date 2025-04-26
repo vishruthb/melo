@@ -5,7 +5,6 @@ from PIL import Image
 from auth0_component import login_button
 from loader import load_model
 
-# ── load secrets from .env ───────────────────────────────────────────
 load_dotenv()
 DOMAIN   = os.getenv("AUTH0_DOMAIN")
 CLIENTID = os.getenv("AUTH0_CLIENT_ID")
@@ -55,7 +54,7 @@ with nav_right:
         unsafe_allow_html=True,
     )
 
-st.markdown(f"<h2 style='color:{SUCCESS};margin-top:1em;'>Welcome, {user.get('name').split()[0]}!</h2>", unsafe_allow_html=True)
+st.markdown(f"<h2 style='color:#58A4B0;margin-top:1em;'>Welcome, {user.get('name').split()[0]}!</h2>", unsafe_allow_html=True)
 
 # ── model & inference helpers ───────────────────────────────────────
 @st.cache_resource(show_spinner=False)
@@ -84,7 +83,7 @@ if uploaded:
         ("LOW", SUCCESS)
     )
 
-    st.subheader("Probability of Melanoma")
+    st.subheader("Results:")
     st.markdown(
         f"<h1 style='color:{sev_col};'>{prob*100:.1f}% ({sev_txt})</h1>",
         unsafe_allow_html=True,
