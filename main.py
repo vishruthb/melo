@@ -5,9 +5,9 @@ from auth0_component import login_button
 from loader import load_model
 
 load_dotenv()
-DOMAIN   = os.environ("AUTH0_DOMAIN")
-CLIENTID = os.environ("AUTH0_CLIENT_ID")
-RET_URL  = os.environ("AUTH0_LOGOUT_RETURN")
+DOMAIN   = os.getenv("AUTH0_DOMAIN")
+CLIENTID = os.getenv("AUTH0_CLIENT_ID")
+RET_URL  = os.getenv("AUTH0_LOGOUT_RETURN")
 
 # ── page + global style ──────────────────────────────────────────────
 st.set_page_config("Melo", "🩺", layout="wide")
