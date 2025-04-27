@@ -3,3 +3,6 @@ streamlit-auth0-component
 streamlit>=1.28
 torch
 torchvision
+pymongo[srv]
+google-generativeai
+reportlab
