@@ -62,7 +62,7 @@ if "user" not in st.session_state:
 
     if user:
         st.session_state["user"] = user
-        st.experimental_rerun()
+        st.rerun()
     else:
         st.stop()
 
@@ -84,7 +84,7 @@ with _:
         )
     if st.button("&larr;"):
         st.session_state.clear()
-        st.experimental_rerun()
+        st.rerun()
         st.markdown(
             f"<script>window.location.href='https://{DOMAIN}/v2/logout?"
             f"client_id={CLIENTID}&returnTo={RET_URL}';</script>",
