@@ -75,7 +75,7 @@ uploaded = st.file_uploader(
 
 if uploaded:
     img = Image.open(uploaded).convert("RGB")
-    st.image(img, caption="Uploaded image", use_column_width=True)
+    st.image(img, caption="Uploaded image", use_container_width=True)
 
     with st.spinner("Analyzing …"):
         x = tfm(img).unsqueeze(0)
