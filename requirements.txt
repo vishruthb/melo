@@ -6,3 +6,4 @@ torchvision
 pymongo[srv]
 google-generativeai
 reportlab
+google.genai
