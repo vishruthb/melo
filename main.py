@@ -40,11 +40,11 @@ if "user" not in st.session_state:
     st.markdown(
         """
         <div style="max-width:600px; margin:2rem auto; text-align:center;">
-          <h1 style="font-size: 100px";>🩺 Melo</h1>
-          <p style="font-size:40px; line-height:1.4;">
+          <h1 style="font-size: 50px";>🩺 Melo</h1>
+          <p style="font-size:30px; line-height:1.4;">
             An ML-based Melanoma detection algorithm.
           </p>
-          <ul style="font-size: 30px; list-style:none; padding:0; text-align:left; display:inline-block;">
+          <ul style="font-size: 20px; list-style:none; padding:0; text-align:left; display:inline-block;">
             <li>✅ Save past image uploads and review history, assign labels, etc.</li>
             <li>✉️ Automatically generate referral emails & PDFs to your healthcare provider(s)</li>
             <li>🔒 Secure and compliant patient data hosting with Auth0 & MongoDB Atlas</li>
