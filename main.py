@@ -33,7 +33,7 @@ nav_left, nav_spacer, nav_right = st.columns([1, 6, 1])
 with nav_left:
     st.markdown("<h2 style='margin:0'>Melo</h2>", unsafe_allow_html=True)
 
-# ── Auth flow ───────────────────────────────────────────────────────
+# ── auth flow ───────────────────────────────────────────────────────
 if "user" not in st.session_state:
     st.markdown("<h2 style='text-align:center;color:#58A4B0;margin-top:15vh;'>ML-Driven Skin Analysis</h2>", unsafe_allow_html=True)
     st.markdown("<div style='text-align:center;'>", unsafe_allow_html=True)
@@ -42,7 +42,7 @@ if "user" not in st.session_state:
 
     if user_info:
         st.session_state["user"] = user_info
-        st.experimental_rerun()
+        st.rerun()
     st.stop()
 
 user = st.session_state["user"]
@@ -50,7 +50,7 @@ user = st.session_state["user"]
 with nav_right:
     if st.button("Log out", key="logout"):
         st.session_state.pop("user", None)
-        st.experimental_rerun()
+        st.rerun()
 
     # hard redirect to Auth0 logout
     st.markdown(
