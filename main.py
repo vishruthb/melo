@@ -4,12 +4,18 @@ from PIL import Image
 from auth0_component import login_button
 from loader import load_model
 
-# ── load local .env (has no effect on Cloud) ────────────────────────
 load_dotenv()
 
 def secret(key: str) -> str:
-    return st.secrets.get(key) or os.getenv(key) or st.error(f"Missing secret: {key}")
+    if os.getenv(key):
+        return os.getenv(key)
 
+    try:
+        return st.secrets[key]
+    except (FileNotFoundError, KeyError):
+        st.error(f"Missing secret: {key}")
+        st.stop()
+        
 DOMAIN   = secret("AUTH0_DOMAIN")
 CLIENTID = secret("AUTH0_CLIENT_ID")
 RET_URL  = secret("AUTH0_LOGOUT_RETURN")
@@ -75,7 +81,7 @@ uploaded = st.file_uploader(
 
 if uploaded:
     img = Image.open(uploaded).convert("RGB")
-    st.image(img, caption="Uploaded image", use_container_width=True)
+    st.image(img, caption="Uploaded image", use_container_width=None)
 
     with st.spinner("Analyzing …"):
         x = tfm(img).unsqueeze(0)

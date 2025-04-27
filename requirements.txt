@@ -1,5 +1,5 @@
 python-dotenv
 streamlit-auth0-component
-streamlit
+streamlit>=1.28
 torch
 torchvision
