@@ -1,4 +1,3 @@
-# main.py
 import os, streamlit as st
 from dotenv import load_dotenv
 from PIL import Image
