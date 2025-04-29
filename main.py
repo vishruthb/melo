@@ -1,6 +1,5 @@
 import os, io, zipfile
 from datetime import datetime
-
 import streamlit as st
 from PIL import Image
 from dotenv import load_dotenv
@@ -103,11 +102,24 @@ col = db["results"]
 
 with st.sidebar.expander("📜 Past Results"):
     st.write(f"User: {user.get('email')}")
-    for doc in col.find({"user_id": user["sub"]}).sort("ts",-1).limit(10):
+
+    # pull all of this user’s docs
+    docs = list(col.find({"user_id": user["sub"]}))
+
+    # define the order you want for severity
+    rank = {"LOW": 0, "MEDIUM": 1, "HIGH": 2}
+
+    # sort by (rank, -timestamp)
+    docs.sort(key=lambda d: (rank.get(d["severity"], 99),
+                             -d["ts"].timestamp()))
+
+    # now show the top 10 in that order
+    for doc in docs[:10]:
         ts = doc["ts"].strftime("%Y-%m-%d %H:%M")
         st.write(f"{ts} — {doc['tag']} — {doc['severity']} "
                  f"({doc['prob_melanoma']*100:.1f}%)")
-    if col.count_documents({"user_id":user["sub"]}) == 0:
+
+    if not docs:
         st.caption("No scans yet.")
 
 # ── Load model ───────────────────────────────────────────────────────────
@@ -131,15 +143,20 @@ decile_msgs = [
 ]
 
 # ── Main upload & analysis ───────────────────────────────────────────────
-uploaded = st.file_uploader("Upload lesion image (JPG/PNG)", type=["jpg","jpeg","png"])
+uploaded = st.file_uploader("Please upload a picture of the affected area (JPG/PNG)", type=["jpg","jpeg","png"])
 if uploaded:
+    # always load the image so you can run inference
     img = Image.open(uploaded).convert("RGB")
-    st.image(img, use_column_width=True)
 
-    # inference
+    # wrap the display in an expander (collapsed by default)
+    with st.expander("▶️ Show uploaded image", expanded=False):
+        st.image(img, use_column_width=True)
+
+    # ── inference ──
     with st.spinner("Analyzing…"):
         x    = tfm(img).unsqueeze(0)
         prob = model(x).softmax(1)[0, labels.index("mel")].item()
+    # …rest of your code…
 
     decile = min(int(prob*10), 9)
     sev, colr = (
@@ -191,6 +208,5 @@ if uploaded:
             file_name=f"melo_{tag}_package.zip",
             mime="application/zip"
         )
-        st.success("Downloaded successfully.")
 
     st.caption("Disclaimer: This tool is for educational purposes and not a substitute for professional medical advice.")

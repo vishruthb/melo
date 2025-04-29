@@ -42,7 +42,7 @@ Tone: professional, clear.
     doc = SimpleDocTemplate(out)
     styles = getSampleStyleSheet()
     story = [
-        Paragraph("Melo – Skin-Lesion Assessment", styles["Title"]),
+        Paragraph("Melo – Analysis Results", styles["Title"]),
         Paragraph(letter.replace("\n", "<br/>"), styles["Normal"]),
         Paragraph("Image:", styles["Heading3"]),
         RLImage(img_buf, width=240, height=240),    # just pass the BytesIO
