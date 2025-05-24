@@ -1,7 +1,7 @@
 # 🩺 Melo
 
 >[!Note]
->https://devpost.com/software/melo-39fqwa
+>Link to [https://devpost.com/software/melo-39fqwa](Devpost).
 
 ## 💡 Inspiration
 We set out to empower patients with a fast, accurate way to assess the risk of melanoma on their own photos—without waiting for specialist appointments. During hackathons and research discussions, we realized that many people notice suspicious moles but hesitate to see a dermatologist due to cost, distance, or anxiety. By combining our backgrounds in machine learning, web development, and healthcare, we decided to build **Melo**: an end-to-end, patient-facing melanoma detection assistant that bridges the gap between self-monitoring and professional care.
