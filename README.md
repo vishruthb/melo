@@ -1,4 +1,4 @@
-# 🩺 Melo
+# melo
 
 >[!Note]
 >Link to [Devpost](https://devpost.com/software/melo-39fqwa).
